@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { getRankings } from "../services/rankingService";
 import { RankingEntry } from "../types";
 
@@ -72,12 +73,12 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
             <table className="w-full border-collapse">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="px-4 py-2 text-left">順位</th>
-                  <th className="px-4 py-2 text-left">ニックネーム</th>
-                  <th className="px-4 py-2 text-right">スコア</th>
-                  <th className="px-4 py-2 text-right">正確率</th>
-                  <th className="px-4 py-2 text-right">速度(文字/分)</th>
-                  <th className="px-4 py-2 text-right">日時</th>
+                  <th className="px-4 py-2 text-sm">順位</th>
+                  <th className="px-4 py-2 text-sm">ニックネーム</th>
+                  <th className="px-4 py-2 text-sm">スコア</th>
+                  <th className="px-4 py-2 text-sm">正確率</th>
+                  <th className="px-4 py-2 text-sm">速度</th>
+                  <th className="px-4 py-2 text-sm">日時</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,22 +86,20 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
                   <tr key={entry.id} className={index % 2 === 0 ? "bg-gray-50" : ""}>
                     <td className="px-4 py-2">
                       {index === 0 ? (
-                        <span className="font-bold text-yellow-500">🥇 1位</span>
+                        <span className="font-bold text-yellow-500 text-xl">🥇1位</span>
                       ) : index === 1 ? (
-                        <span className="font-bold text-gray-400">🥈 2位</span>
+                        <span className="font-bold text-gray-400 text-xl">🥈2位</span>
                       ) : index === 2 ? (
-                        <span className="font-bold text-amber-700">🥉 3位</span>
+                        <span className="font-bold text-amber-700 text-xl">🥉3位</span>
                       ) : (
                         `${index + 1}位`
                       )}
                     </td>
-                    <td className="px-4 py-2 font-medium">{entry.nickname}</td>
-                    <td className="px-4 py-2 text-right font-bold">{entry.score}</td>
-                    <td className="px-4 py-2 text-right">{entry.accuracy}%</td>
-                    <td className="px-4 py-2 text-right">{entry.typingSpeed}</td>
-                    <td className="px-4 py-2 text-right text-sm text-gray-600">
-                      {formatDate(entry.date)}
-                    </td>
+                    <td className="px-4 py-2 font-medium text-xl">{entry.nickname}</td>
+                    <td className="px-4 py-2 text-right font-bold text-xl">{entry.score}</td>
+                    <td className="px-4 py-2 text-right text-xl">{entry.accuracy}%</td>
+                    <td className="px-4 py-2 text-right text-xl">{entry.typingSpeed}</td>
+                    <td className="px-4 py-2 text-right text-sm text-gray-600">{formatDate(entry.date)}</td>
                   </tr>
                 ))}
               </tbody>
