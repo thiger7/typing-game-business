@@ -57,16 +57,16 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
   return (
     <div className="card">
       <div className="container">
-        <div className="text-center mb-4">
+        <div className="mb-4 text-center">
           <h2>ランキング TOP 10</h2>
         </div>
 
         {loading ? (
-          <div className="text-center py-8">
+          <div className="py-8 text-center">
             <p>ランキングデータを読み込み中...</p>
           </div>
         ) : rankings.length === 0 ? (
-          <div className="text-center py-8">
+          <div className="py-8 text-center">
             <p>ランキングデータがまだありません。</p>
             <p>プレイして最初のランキングに名前を刻みましょう！</p>
           </div>
@@ -88,17 +88,17 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
                   <tr key={entry.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-slate-100"}>
                     <td className="px-4 py-2">
                       {index === 0 ? (
-                        <span className="font-bold text-yellow-500 text-xl">🥇1位</span>
+                        <span className="text-xl font-bold text-yellow-500">🥇1位</span>
                       ) : index === 1 ? (
-                        <span className="font-bold text-gray-400 text-xl">🥈2位</span>
+                        <span className="text-xl font-bold text-gray-400">🥈2位</span>
                       ) : index === 2 ? (
-                        <span className="font-bold text-amber-700 text-xl">🥉3位</span>
+                        <span className="text-xl font-bold text-amber-700">🥉3位</span>
                       ) : (
                         <span className="text-xl">{`${index + 1}位`}</span>
                       )}
                     </td>
-                    <td className="px-4 py-2 font-medium text-xl">{entry.nickname}</td>
-                    <td className="px-4 py-2 text-right font-bold text-xl">{entry.score}</td>
+                    <td className="px-4 py-2 text-xl font-medium">{entry.nickname}</td>
+                    <td className="px-4 py-2 text-right text-xl font-bold">{entry.score}</td>
                     <td className="px-4 py-2 text-right text-xl">{entry.accuracy}%</td>
                     <td className="px-4 py-2 text-right text-xl">{entry.typingSpeed}</td>
                     <td className="px-4 py-2 text-right text-sm text-gray-600">{formatDate(entry.date)}</td>
@@ -109,7 +109,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
           </div>
         )}
 
-        <div className="text-center mt-6">
+        <div className="mt-6 text-center">
           <button className="button" onClick={onClose}>
             閉じる
           </button>

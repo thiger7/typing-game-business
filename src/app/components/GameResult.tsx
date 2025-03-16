@@ -75,7 +75,7 @@ export const GameResult: React.FC<GameResultProps> = ({
   return (
     <div id="endGame" className="card">
       <div className="result-container container">
-        <div className="text-center mb-4 pb-2">
+        <div className="mb-4 pb-2 text-center">
           <h2>RESULT</h2>
         </div>
 
@@ -164,13 +164,13 @@ export const GameResult: React.FC<GameResultProps> = ({
           </div>
         </div>
 
-        {/* ランキング登録フォーム */}
-        <div className="ranking-registration mt-6 p-4 bg-blue-50 rounded-lg">
-          <h3 className="text-lg font-bold mb-3">ランキングに登録する</h3>
+        {/* ランキング登録フォーム - カスタムクラスをTailwindクラスに置き換え */}
+        <div className="mt-6 rounded-lg bg-blue-50 p-4">
+          <h3 className="mb-3 text-lg font-bold">ランキングに登録する</h3>
 
           {!isRegistered ? (
             <>
-              <div className="flex flex-col md:flex-row gap-3 items-center">
+              <div className="flex flex-col items-center gap-3 md:flex-row">
                 <div className="w-full md:w-2/3">
                   <input
                     type="text"
@@ -178,27 +178,29 @@ export const GameResult: React.FC<GameResultProps> = ({
                     onChange={(e) => setNickname(e.target.value)}
                     placeholder="ニックネーム (5文字以内)"
                     disabled={isRegistering}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     maxLength={5}
                   />
-                  {registrationError && <p className="text-red-500 text-sm mt-1">{registrationError}</p>}
-                  <p className="text-xs text-gray-500 mt-1">{nickname.length}/5文字</p>
+                  {registrationError && <p className="mt-1 text-sm text-red-500">{registrationError}</p>}
+                  <p className="mt-1 text-xs text-gray-500">
+                    {nickname.length}/5文字
+                  </p>
                 </div>
                 <button onClick={handleRegisterRanking} disabled={isRegistering} className="button w-full md:w-1/3">
                   {isRegistering ? "登録中..." : "ランキングに登録"}
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-2">※スコア、正確率、タイピング速度がランキングに登録されます</p>
+              <p className="mt-2 text-xs text-gray-500">※スコア、正確率、タイピング速度がランキングに登録されます</p>
             </>
           ) : (
-            <div className="text-center py-2">
-              <p className="text-green-600 font-bold">ランキングに登録しました！</p>
-              <p className="text-sm mt-1">ニックネーム: {nickname}</p>
+            <div className="py-2 text-center">
+              <p className="font-bold text-green-600">ランキングに登録しました！</p>
+              <p className="mt-1 text-sm">ニックネーム: {nickname}</p>
             </div>
           )}
         </div>
 
-        <div className="flex justify-center gap-4 mt-4">
+        <div className="mt-4 flex justify-center gap-4">
           <button id="retryButton" className="button" onClick={onRetry}>
             再チャレンジ
           </button>

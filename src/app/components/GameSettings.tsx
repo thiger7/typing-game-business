@@ -33,7 +33,7 @@ export const GameSettings: React.FC<GameSettingsProps> = ({ onStartGame }) => {
               <p style={{ fontSize: "0.5em" }}>ビジネス用語をタイピングしてスコアを競おう！</p>
             </div>
 
-            <div className="flex flex-col space-y-4 mt-8">
+            <div className="mt-8 flex flex-col space-y-4">
               <button id="startButton" className="button" onClick={onStartGame}>
                 タイピング開始
               </button>
