@@ -36,7 +36,6 @@ export const GamePlay: React.FC<GamePlayProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
-  const [hasError, setHasError] = useState(false);
   const [countdown, setCountdown] = useState(3);
   const [isCountingDown, setIsCountingDown] = useState(true);
 
@@ -45,7 +44,6 @@ export const GamePlay: React.FC<GamePlayProps> = ({
     if (inputRef.current) {
       inputRef.current.focus();
     }
-    setHasError(false);
   }, [currentWord]);
 
   useEffect(() => {
@@ -136,7 +134,6 @@ export const GamePlay: React.FC<GamePlayProps> = ({
     // 入力された文字が正しいかどうかを確認
     if (expectedChar && newChar !== expectedChar) {
       console.log(`ミスを検出: 期待 "${expectedChar}", 入力 "${newChar}"`);
-      setHasError(true);
     } else if (!expectedChar) {
       // 入力が単語の長さを超えた場合
       console.log(`単語の長さを超える入力: ${value}`);
