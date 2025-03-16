@@ -45,6 +45,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Escape") {
+        console.log("ランキング画面を閉じます");
         onClose();
       }
     };

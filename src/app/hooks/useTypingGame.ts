@@ -305,8 +305,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     }
   }, [timeLimit, updateTimer]);
 
-  // 再チャレンジする関数
-  const handleRetry = useCallback(() => {
+  // ゲームをリセットする関数
+  const resetGame = useCallback(() => {
     // タイマーをクリア
     if (timerRef.current && typeof window !== "undefined") {
       clearInterval(timerRef.current);
@@ -350,7 +350,14 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         completionBonus: 0,
       },
     });
+    startGame;
   }, [timeLimit]);
+
+  // 再チャレンジする関数
+  const handleRetry = () => {
+    resetGame();
+    startGame();
+  };
 
   // 前回のミス状態を保持して不要な音を鳴らさないようにするための参照
   const prevMistakesRef = useRef<{ [key: number]: boolean }>({});
@@ -523,6 +530,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     typeStats,
     startGame,
     handleInputChange,
+    resetGame,
     handleRetry,
     displayNewWord,
     calculateFinalScore,

@@ -12,7 +12,7 @@ const MemoizedGameResult = memo(GameResult);
 const MemoizedGameSettings = memo(GameSettings);
 
 function App() {
-  const { gameState, typeStats, startGame, handleInputChange, handleRetry } =
+  const { gameState, typeStats, startGame, handleInputChange, handleRetry, resetGame } =
     useTypingGame();
 
   const {
@@ -29,8 +29,7 @@ function App() {
   } = gameState;
 
   const onReturnToTitle = () => {
-    // Handle returning to the title screen
-    handleRetry(); // Reset the game state
+    resetGame();
   };
 
   return (
@@ -69,6 +68,7 @@ function App() {
           totalQuestions={typeStats.wordsCompleted}
           typeStats={typeStats}
           onRetry={handleRetry}
+          onStartGame={startGame}
           onReturnToTitle={onReturnToTitle} // Pass the function as a prop
         />
       )}

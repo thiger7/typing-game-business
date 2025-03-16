@@ -11,7 +11,7 @@ import { Header } from "./components/Header";
 import { useTypingGame } from "./hooks/useTypingGame";
 
 export default function Home() {
-  const { gameState, typeStats, startGame, handleInputChange, handleRetry } = useTypingGame();
+  const { gameState, typeStats, startGame, handleInputChange, resetGame, handleRetry } = useTypingGame();
 
   const {
     currentWord,
@@ -27,8 +27,7 @@ export default function Home() {
   } = gameState;
 
   const onReturnToTitle = () => {
-    // Handle returning to the title screen
-    handleRetry(); // Reset the game state
+    resetGame();
   };
 
   return (

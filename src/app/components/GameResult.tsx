@@ -4,12 +4,14 @@ import { Ranking } from "@/app/components/Ranking";
 
 import { registerRanking } from "../services/rankingService";
 import { TypeStats } from "../types";
+import { cp } from "fs";
 
 interface GameResultProps {
   score: number;
   totalQuestions: number;
   typeStats: TypeStats;
   onRetry: () => void;
+  onStartGame: () => void;
   onReturnToTitle: () => void;
 }
 
@@ -18,6 +20,7 @@ export const GameResult: React.FC<GameResultProps> = ({
   totalQuestions,
   typeStats,
   onRetry,
+  onStartGame,
   onReturnToTitle,
 }) => {
   const [nickname, setNickname] = useState("");
@@ -31,14 +34,15 @@ export const GameResult: React.FC<GameResultProps> = ({
       if (event.code === "Space") {
         onRetry();
       } else if (event.code === "Escape") {
-        onReturnToTitle();
+        console.log("ランキング画面を閉じます");
+        setShowRanking(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onRetry, onReturnToTitle]);
+  }, [onRetry, onStartGame, onReturnToTitle]);
 
   // ランキングに登録する関数
   const handleRegisterRanking = async () => {
