@@ -32,7 +32,7 @@ export default function Home() {
   };
 
   return (
-    <div id="gameContainer" className="container mx-auto px-4 py-8 max-w-4xl">
+    <div id="gameContainer" className="container mx-auto max-w-4xl px-4 py-8">
       <Header />
 
       {/* ゲーム設定画面 */}

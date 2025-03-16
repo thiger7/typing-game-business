@@ -16,8 +16,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     questionsRemaining: 0,
     questionLimit: 0,
     timeLeft: timeLimit,
-    wordTimeLimit: 0, // 追加: 単語ごとの制限時間
-    wordTimeLeft: 0, // 追加: 単語の残り時間
+    wordTimeLimit: 0,
+    wordTimeLeft: 0,
     score: 0,
     isGameStarted: false,
     isGameOver: false,
@@ -201,39 +201,6 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     }));
   }, [getRandomWord]);
 
-  // タイマーを更新する関数
-  const updateTimer = useCallback(() => {
-    setGameState((prev) => {
-      const newTimeLeft = prev.timeLeft - 1;
-      // 時間切れの場合はゲーム終了
-      if (newTimeLeft <= 0) {
-        // タイマーをクリア
-        if (timerRef.current && typeof window !== "undefined") {
-          clearInterval(timerRef.current);
-          timerRef.current = null;
-        }
-
-        // 単語タイマーもクリア
-        if (wordTimerIntervalRef.current && typeof window !== "undefined") {
-          clearInterval(wordTimerIntervalRef.current);
-          wordTimerIntervalRef.current = null;
-        }
-        // 最終スコアを計算
-        calculateFinalScore();
-        return {
-          ...prev,
-          timeLeft: 0,
-          isGameStarted: false,
-          isGameOver: true,
-        };
-      }
-      return {
-        ...prev,
-        timeLeft: newTimeLeft,
-      };
-    });
-  }, []);
-
   // 最終スコアを計算する関数
   const calculateFinalScore = useCallback(() => {
     setTypeStats((prev) => {
@@ -274,6 +241,39 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       };
     });
   }, []);
+
+  // タイマーを更新する関数
+  const updateTimer = useCallback(() => {
+    setGameState((prev) => {
+      const newTimeLeft = prev.timeLeft - 1;
+      // 時間切れの場合はゲーム終了
+      if (newTimeLeft <= 0) {
+        // タイマーをクリア
+        if (timerRef.current && typeof window !== "undefined") {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+
+        // 単語タイマーもクリア
+        if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+          clearInterval(wordTimerIntervalRef.current);
+          wordTimerIntervalRef.current = null;
+        }
+        // 最終スコアを計算
+        calculateFinalScore();
+        return {
+          ...prev,
+          timeLeft: 0,
+          isGameStarted: false,
+          isGameOver: true,
+        };
+      }
+      return {
+        ...prev,
+        timeLeft: newTimeLeft,
+      };
+    });
+  }, [calculateFinalScore]);
 
   // ゲームを開始する関数
   const startGame = useCallback(() => {

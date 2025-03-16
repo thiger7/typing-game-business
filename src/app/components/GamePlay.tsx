@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 import { Word } from "../types";
 
 interface GamePlayProps {
@@ -75,9 +76,7 @@ export const GamePlay: React.FC<GamePlayProps> = ({
     }
   };
 
-  const getCharacterStates = (): Array<
-    "correct" | "incorrect" | "neutral" | "next"
-  > => {
+  const getCharacterStates = (): Array<"correct" | "incorrect" | "neutral" | "next"> => {
     const states: Array<"correct" | "incorrect" | "neutral" | "next"> = [];
 
     // 各文字の状態を確認
@@ -132,11 +131,7 @@ export const GamePlay: React.FC<GamePlayProps> = ({
     const nextIndex = prevInput.length;
     const expectedChar = currentWord.roman[nextIndex];
 
-    console.log(
-      `入力チェック - インデックス:${nextIndex}, 期待:${
-        expectedChar || "終了"
-      }, 入力:${newChar}`,
-    );
+    console.log(`入力チェック - インデックス:${nextIndex}, 期待:${expectedChar || "終了"}, 入力:${newChar}`);
 
     // 入力された文字が正しいかどうかを確認
     if (expectedChar && newChar !== expectedChar) {
@@ -155,12 +150,11 @@ export const GamePlay: React.FC<GamePlayProps> = ({
   const renderWord = () => {
     const characterStates = getCharacterStates();
     const chars = currentWord.roman.split("");
-
     // 最後に間違えた文字がある場合の表示を調整
     return (
-      <div className="word-container">
+      <div className="flex w-full flex-col">
         {/* お題のスペルを表示 */}
-        <div className="expected-word">
+        <div className="flex flex-wrap items-center justify-center">
           {chars.map((char, index) => (
             <span key={index} className={characterStates[index]}>
               {char}
@@ -173,19 +167,14 @@ export const GamePlay: React.FC<GamePlayProps> = ({
 
   if (isCountingDown) {
     return (
-      <div className="countdown">
+      <div className="flex h-40 items-center justify-center">
         <h1>{countdown}</h1>
       </div>
     );
   }
 
   return (
-    <div
-      id="game"
-      className="card"
-      ref={gameAreaRef}
-      onClick={handleGameAreaClick}
-      tabIndex={0}>
+    <div id="game" className="card" ref={gameAreaRef} onClick={handleGameAreaClick} tabIndex={0}>
       <div className="game-header">
         <div className="timer-container">
           <div className="timer" id="timer">
@@ -212,15 +201,13 @@ export const GamePlay: React.FC<GamePlayProps> = ({
           id="typeInput"
           className="hidden-input"
           value={userInput}
-          onChange={e => handleInputChange(e.target.value)}
+          onChange={(e) => handleInputChange(e.target.value)}
           autoFocus
         />
 
         <div className="typing-instruction">
           {wordTimeLeft !== undefined && (
-            <div
-              className="word-timer"
-              title={`単語の制限時間: ${wordTimeLimit}秒`}>
+            <div className="word-timer" title={`単語の制限時間: ${wordTimeLimit}秒`}>
               <div
                 className="word-timer-bar"
                 style={{
@@ -229,13 +216,10 @@ export const GamePlay: React.FC<GamePlayProps> = ({
                     wordTimeLeft < wordTimeLimit * 0.2
                       ? "#e74c3c"
                       : wordTimeLeft < wordTimeLimit * 0.5
-                      ? "#f1c40f"
-                      : "#3498db",
+                        ? "#f1c40f"
+                        : "#3498db",
                   // wordTimeLeftがwordTimeLimitに近い（新しい単語が表示された）場合はtransitionを無効化
-                  transition:
-                    Math.abs(wordTimeLeft - wordTimeLimit) < 0.1
-                      ? "none"
-                      : "width 0.5s linear",
+                  transition: Math.abs(wordTimeLeft - wordTimeLimit) < 0.1 ? "none" : "width 0.5s linear",
                 }}
               />
             </div>

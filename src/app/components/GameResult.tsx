@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import { TypeStats } from "../types";
 
 interface GameResultProps {
@@ -32,8 +33,8 @@ export const GameResult: React.FC<GameResultProps> = ({
 
   return (
     <div id="endGame" className="card">
-      <div className="container result-container">
-        <div className="result-header">
+      <div className="result-container container">
+        <div className="mb-4 pb-2 text-center">
           <h2>RESULT</h2>
         </div>
 
@@ -108,17 +109,13 @@ export const GameResult: React.FC<GameResultProps> = ({
                 <tr>
                   <td>正確タイプ数</td>
                   <td>
-                    <span className="highlight-success">
-                      {typeStats.correctTyped}
-                    </span>
+                    <span className="highlight-success">{typeStats.correctTyped}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>ミスタイプ数</td>
                   <td>
-                    <span className="highlight-error">
-                      {typeStats.mistakeTyped}
-                    </span>
+                    <span className="highlight-error">{typeStats.mistakeTyped}</span>
                   </td>
                 </tr>
               </tbody>
