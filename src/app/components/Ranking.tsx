@@ -12,12 +12,13 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadRankings = () => {
+    const loadRankings = async () => {
       try {
         // ランキングデータを取得して上位10位までに制限
-        const allRankings = getRankings();
+        const allRankings = await getRankings();
         const top10Rankings = allRankings.slice(0, 10);
         setRankings(top10Rankings);
+        console.log("ランキングデータを読み込みました:", top10Rankings);
       } catch (error) {
         console.error("ランキングデータの読み込みに失敗しました:", error);
       } finally {
@@ -101,7 +102,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
                     <td className="px-4 py-2 text-right text-xl font-bold">{entry.score}</td>
                     <td className="px-4 py-2 text-right text-xl">{entry.accuracy}%</td>
                     <td className="px-4 py-2 text-right text-xl">{entry.typingSpeed}</td>
-                    <td className="px-4 py-2 text-right text-sm text-gray-600">{formatDate(entry.date)}</td>
+                    <td className="px-4 py-2 text-right text-sm text-gray-600">{formatDate(entry.created_at)}</td>
                   </tr>
                 ))}
               </tbody>

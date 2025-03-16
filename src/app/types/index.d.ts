@@ -49,7 +49,7 @@ export type RankingEntry = {
   score: number;
   accuracy: number;
   typingSpeed: number;
-  date: string;
+  created_at: string;
 };
 
 // ランキング登録リクエスト型
