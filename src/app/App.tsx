@@ -1,25 +1,27 @@
-"use client";
-
-import React from "react";
-
+import React, { memo } from "react";
 import "./App.css";
-
+import { Header } from "./components/Header";
+import { GameSettings } from "./components/GameSettings";
 import { GamePlay } from "./components/GamePlay";
 import { GameResult } from "./components/GameResult";
-import { GameSettings } from "./components/GameSettings";
-import { Header } from "./components/Header";
 import { useTypingGame } from "./hooks/useTypingGame";
 
-export default function Home() {
-  const { gameState, typeStats, startGame, handleInputChange, handleRetry } = useTypingGame();
+// メモ化されたコンポーネント
+const MemoizedGamePlay = memo(GamePlay);
+const MemoizedGameResult = memo(GameResult);
+const MemoizedGameSettings = memo(GameSettings);
+
+function App() {
+  const { gameState, typeStats, startGame, handleInputChange, handleRetry } =
+    useTypingGame();
 
   const {
     currentWord,
     userInput,
     mistakeCount,
     timeLeft,
-    wordTimeLimit,
-    wordTimeLeft,
+    wordTimeLimit, // 追加: 単語ごとの制限時間
+    wordTimeLeft, // 追加: 単語の残り時間
     score,
     isGameStarted,
     isGameOver,
@@ -32,21 +34,23 @@ export default function Home() {
   };
 
   return (
-    <div id="gameContainer" className="container mx-auto px-4 py-8 max-w-4xl">
+    <div id="gameContainer">
       <Header />
 
       {/* ゲーム設定画面 */}
-      {!isGameStarted && !isGameOver && <GameSettings onStartGame={startGame} />}
+      {!isGameStarted && !isGameOver && (
+        <MemoizedGameSettings onStartGame={startGame} />
+      )}
 
       {/* ゲーム進行画面 */}
       {isGameStarted && (
-        <GamePlay
+        <MemoizedGamePlay
           currentWord={currentWord}
           userInput={userInput}
           mistakeCount={mistakeCount}
           timeLeft={timeLeft}
-          wordTimeLimit={wordTimeLimit}
-          wordTimeLeft={wordTimeLeft}
+          wordTimeLimit={wordTimeLimit} // 追加
+          wordTimeLeft={wordTimeLeft} // 追加
           score={score}
           combo={typeStats.combo}
           maxCombo={typeStats.maxCombo}
@@ -54,20 +58,22 @@ export default function Home() {
           wordsCompleted={typeStats.wordsCompleted}
           lastMistakeChar={lastMistakeChar}
           onInputChange={handleInputChange}
-          onReturnToTitle={onReturnToTitle}
+          onReturnToTitle={onReturnToTitle} // Pass the function as a prop
         />
       )}
 
       {/* ゲーム結果画面 */}
       {isGameOver && (
-        <GameResult
+        <MemoizedGameResult
           score={score}
           totalQuestions={typeStats.wordsCompleted}
           typeStats={typeStats}
           onRetry={handleRetry}
-          onReturnToTitle={onReturnToTitle}
+          onReturnToTitle={onReturnToTitle} // Pass the function as a prop
         />
       )}
     </div>
   );
 }
+
+export default App;
