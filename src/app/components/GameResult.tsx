@@ -44,6 +44,12 @@ export const GameResult: React.FC<GameResultProps> = ({
       return;
     }
 
+    // 5文字以内かどうかチェック
+    if (nickname.trim().length > 5) {
+      setRegistrationError("ニックネームは5文字以内で入力してください");
+      return;
+    }
+
     setIsRegistering(true);
     setRegistrationError("");
 
@@ -170,12 +176,15 @@ export const GameResult: React.FC<GameResultProps> = ({
                     type="text"
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
-                    placeholder="ニックネーム"
+                    placeholder="ニックネーム (5文字以内)"
                     disabled={isRegistering}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    maxLength={15}
+                    maxLength={5}
                   />
                   {registrationError && <p className="text-red-500 text-sm mt-1">{registrationError}</p>}
+                  <p className="text-xs text-gray-500 mt-1">
+                    {nickname.length}/5文字
+                  </p>
                 </div>
                 <button onClick={handleRegisterRanking} disabled={isRegistering} className="button w-full md:w-1/3">
                   {isRegistering ? "登録中..." : "ランキングに登録"}

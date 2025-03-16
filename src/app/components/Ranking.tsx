@@ -83,7 +83,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
               </thead>
               <tbody>
                 {rankings.map((entry, index) => (
-                  <tr key={entry.id} className={index % 2 === 0 ? "bg-gray-50" : ""}>
+                  <tr key={entry.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-slate-100"}>
                     <td className="px-4 py-2">
                       {index === 0 ? (
                         <span className="font-bold text-yellow-500 text-xl">🥇1位</span>
@@ -92,7 +92,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
                       ) : index === 2 ? (
                         <span className="font-bold text-amber-700 text-xl">🥉3位</span>
                       ) : (
-                        `${index + 1}位`
+                        <span className="text-xl">{`${index + 1}位`}</span>
                       )}
                     </td>
                     <td className="px-4 py-2 font-medium text-xl">{entry.nickname}</td>
