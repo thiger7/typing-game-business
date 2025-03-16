@@ -14,8 +14,10 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
   useEffect(() => {
     const loadRankings = () => {
       try {
-        const data = getRankings();
-        setRankings(data);
+        // ランキングデータを取得して上位10位までに制限
+        const allRankings = getRankings();
+        const top10Rankings = allRankings.slice(0, 10);
+        setRankings(top10Rankings);
       } catch (error) {
         console.error("ランキングデータの読み込みに失敗しました:", error);
       } finally {
@@ -56,7 +58,7 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
     <div className="card">
       <div className="container">
         <div className="text-center mb-4">
-          <h2>ランキング</h2>
+          <h2>ランキング TOP 10</h2>
         </div>
 
         {loading ? (

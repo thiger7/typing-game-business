@@ -182,9 +182,7 @@ export const GameResult: React.FC<GameResultProps> = ({
                     maxLength={5}
                   />
                   {registrationError && <p className="text-red-500 text-sm mt-1">{registrationError}</p>}
-                  <p className="text-xs text-gray-500 mt-1">
-                    {nickname.length}/5文字
-                  </p>
+                  <p className="text-xs text-gray-500 mt-1">{nickname.length}/5文字</p>
                 </div>
                 <button onClick={handleRegisterRanking} disabled={isRegistering} className="button w-full md:w-1/3">
                   {isRegistering ? "登録中..." : "ランキングに登録"}
