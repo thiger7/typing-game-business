@@ -33,9 +33,6 @@ export const GameResult: React.FC<GameResultProps> = ({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Space") {
         onRetry();
-      } else if (event.code === "Escape") {
-        console.log("ランキング画面を閉じます");
-        setShowRanking(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
