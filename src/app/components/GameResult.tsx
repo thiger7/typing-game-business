@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import { registerRanking } from "../services/rankingService";
 import { TypeStats } from "../types";
 
 interface GameResultProps {
@@ -17,6 +18,11 @@ export const GameResult: React.FC<GameResultProps> = ({
   onRetry,
   onReturnToTitle,
 }) => {
+  const [nickname, setNickname] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Space") {
@@ -31,10 +37,39 @@ export const GameResult: React.FC<GameResultProps> = ({
     };
   }, [onRetry, onReturnToTitle]);
 
+  // ランキングに登録する関数
+  const handleRegisterRanking = async () => {
+    if (!nickname.trim()) {
+      setRegistrationError("ニックネームを入力してください");
+      return;
+    }
+
+    setIsRegistering(true);
+    setRegistrationError("");
+
+    try {
+      // ランキングサービスを使用して登録
+      await registerRanking({
+        nickname: nickname.trim(),
+        score,
+        accuracy: typeStats.accuracy,
+        typingSpeed: typeStats.typingSpeed,
+      });
+
+      setIsRegistered(true);
+      console.log("ランキング登録成功:", { nickname, score, stats: typeStats });
+    } catch (error) {
+      setRegistrationError("ランキング登録に失敗しました。後でもう一度お試しください。");
+      console.error("ランキング登録エラー:", error);
+    } finally {
+      setIsRegistering(false);
+    }
+  };
+
   return (
     <div id="endGame" className="card">
       <div className="result-container container">
-        <div className="mb-4 pb-2 text-center">
+        <div className="text-center mb-4 pb-2">
           <h2>RESULT</h2>
         </div>
 
@@ -122,9 +157,48 @@ export const GameResult: React.FC<GameResultProps> = ({
             </table>
           </div>
         </div>
-        <button id="retryButton" className="button" onClick={onRetry}>
-          再チャレンジ
-        </button>
+
+        {/* ランキング登録フォーム */}
+        <div className="ranking-registration mt-6 p-4 bg-blue-50 rounded-lg">
+          <h3 className="text-lg font-bold mb-3">ランキングに登録する</h3>
+
+          {!isRegistered ? (
+            <>
+              <div className="flex flex-col md:flex-row gap-3 items-center">
+                <div className="w-full md:w-2/3">
+                  <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    placeholder="ニックネーム"
+                    disabled={isRegistering}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    maxLength={15}
+                  />
+                  {registrationError && <p className="text-red-500 text-sm mt-1">{registrationError}</p>}
+                </div>
+                <button onClick={handleRegisterRanking} disabled={isRegistering} className="button w-full md:w-1/3">
+                  {isRegistering ? "登録中..." : "ランキングに登録"}
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-2">※スコア、正確率、タイピング速度がランキングに登録されます</p>
+            </>
+          ) : (
+            <div className="text-center py-2">
+              <p className="text-green-600 font-bold">ランキングに登録しました！</p>
+              <p className="text-sm mt-1">ニックネーム: {nickname}</p>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-center gap-4 mt-4">
+          <button id="retryButton" className="button" onClick={onRetry}>
+            再チャレンジ
+          </button>
+          <button className="button" onClick={onReturnToTitle}>
+            タイトルに戻る
+          </button>
+        </div>
       </div>
     </div>
   );

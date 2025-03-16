@@ -4,7 +4,7 @@ import { words } from "../data/words";
 import { GameState, TypeStats, Word } from "../types";
 
 // ゲーム関連の定数
-const DEFAULT_TIME_LIMIT = 103; // 100秒制限
+const DEFAULT_TIME_LIMIT = 13; // 100秒制限
 
 export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   // ゲームの状態を管理

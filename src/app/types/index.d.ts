@@ -41,3 +41,21 @@ export type TypeStats = {
     completionBonus: number; // 完走ボーナス
   };
 };
+
+// ランキングのエントリ型
+export type RankingEntry = {
+  id: string;
+  nickname: string;
+  score: number;
+  accuracy: number;
+  typingSpeed: number;
+  date: string;
+};
+
+// ランキング登録リクエスト型
+export type RegisterRankingRequest = {
+  nickname: string;
+  score: number;
+  accuracy: number;
+  typingSpeed: number;
+};
