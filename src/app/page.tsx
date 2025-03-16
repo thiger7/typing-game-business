@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <>
       <main className="text-red-500">page</main>
-      <p className="text-re">テストです</p>
+      <h2 className="bg-blue-500">テスト</h2>
     </>
   );
 }
