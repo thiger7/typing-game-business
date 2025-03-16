@@ -225,6 +225,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
           comboBonus,
           speedBonus,
           accuracyBonus,
+          completionBonus: prev.detailedScores.completionBonus,
         },
       };
     });
