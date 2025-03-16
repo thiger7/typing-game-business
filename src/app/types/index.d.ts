@@ -16,6 +16,7 @@ export type GameState = {
   isGameOver: boolean;
   wordTimeLimit: number;
   wordTimeLeft: number;
+  lastMistakeChar: string;
 };
 
 export type GameSettings = {

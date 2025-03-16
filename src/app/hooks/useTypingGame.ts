@@ -5,7 +5,6 @@ import { GameState, TypeStats, Word } from "../types";
 
 // ゲーム関連の定数
 const DEFAULT_TIME_LIMIT = 103; // 100秒制限
-const COMBO_THRESHOLD = 5; // コンボボーナスの閾値
 
 export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   // ゲームの状態を管理
@@ -54,7 +53,6 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   const typeSoundRef = useRef<HTMLAudioElement | null>(null);
   const wrongSoundRef = useRef<HTMLAudioElement | null>(null);
   const correctSoundRef = useRef<HTMLAudioElement | null>(null);
-  const comboSoundRef = useRef<HTMLAudioElement | null>(null);
 
   // 音声ファイルを初期化
   useEffect(() => {
@@ -68,9 +66,6 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       if (wrongSoundRef.current) {
         wrongSoundRef.current.volume = 0.3;
       }
-      if (comboSoundRef.current) {
-        comboSoundRef.current.volume = 0.5;
-      }
     }
 
     return () => {
@@ -78,12 +73,11 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       typeSoundRef.current = null;
       wrongSoundRef.current = null;
       correctSoundRef.current = null;
-      comboSoundRef.current = null;
     };
   }, []);
 
   // 音を再生する関数
-  const playSound = useCallback((sound: "type" | "wrong" | "correct" | "combo") => {
+  const playSound = useCallback((sound: "type" | "wrong" | "correct") => {
     // クライアントサイドでのみ実行されるようにする
     if (typeof window === "undefined") return;
 
@@ -97,9 +91,6 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         break;
       case "correct":
         audio = correctSoundRef.current;
-        break;
-      case "combo":
-        audio = comboSoundRef.current;
         break;
     }
     if (audio) {
@@ -218,10 +209,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       const speedBonus = Math.floor(typingSpeed / 50) * 200;
       // 正確性ボーナス（正確率に応じて）
       const accuracyBonus = Math.floor(accuracy / 10) * 100;
-      // 完走ボーナスは削除（常に0）
-      const completionBonus = 0;
       // 最終スコアを計算
-      const totalScore = baseScore + comboBonus + speedBonus + accuracyBonus + completionBonus;
+      const totalScore = baseScore + comboBonus + speedBonus + accuracyBonus;
       // ゲーム状態の更新
       setGameState((gs) => ({
         ...gs,
@@ -236,7 +225,6 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
           comboBonus,
           speedBonus,
           accuracyBonus,
-          completionBonus,
         },
       };
     });
