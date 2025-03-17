@@ -215,7 +215,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       // タイピングスピードを計算（1分あたりの文字数）
       const endTime = new Date();
       const elapsedMinutes = prev.startTime ? (endTime.getTime() - prev.startTime.getTime()) / 60000 : 1;
-      const typingSpeed = Math.round(prev.totalTyped / elapsedMinutes);
+      const typingSpeed = Math.round(prev.correctTyped / elapsedMinutes);
       // 正確率を計算
       const accuracy = prev.totalTyped > 0 ? Math.round((prev.correctTyped / prev.totalTyped) * 100) : 100;
       // 基本スコアは正確にタイプした文字数
