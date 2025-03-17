@@ -4,13 +4,24 @@ import { words } from "../data/words";
 import { GameState, TypeStats, Word } from "../types";
 
 // ゲーム関連の定数
-const DEFAULT_TIME_LIMIT = 10; // 100秒制限
+const DEFAULT_TIME_LIMIT = 60;
 const COUNT_DOWN_TIME = 3; // カウントダウン秒数
+
+// 安全な初期単語（デフォルト値）
+const DEFAULT_WORD: Word = { japanese: "タイピング", roman: "taipingu" };
+
+// ランダムな単語を取得する純粋な関数（コンポーネント外で定義）
+const getRandomWordFromList = (wordList: Word[]): Word => {
+  if (!wordList || wordList.length === 0) {
+    return DEFAULT_WORD;
+  }
+  return wordList[Math.floor(Math.random() * wordList.length)];
+};
 
 export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   // ゲームの状態を管理
   const [gameState, setGameState] = useState<GameState>({
-    currentWord: { japanese: "", roman: "" },
+    currentWord: DEFAULT_WORD, // 空のオブジェクトではなく初期値を設定
     userInput: "",
     mistakeCount: 0,
     questionsRemaining: 0,
@@ -49,6 +60,9 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
   // 単語ごとの制限時間を更新するインターバル
   const wordTimerIntervalRef = useRef<number | null>(null);
+
+  // 単語リストの参照
+  const wordsRef = useRef<Word[]>(words);
 
   // 音声ファイルの読み込み
   const typeSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -100,34 +114,58 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     }
   }, []);
 
-  // カウントダウン中かどうかをチェックする関数（startGameとupdateTimerの間あたりに追加）
+  // カウントダウン中かどうかをチェックする関数
   const isCountingDown = useCallback(() => {
     return gameState.isGameStarted && gameState.timeLeft > timeLimit;
   }, [gameState.isGameStarted, gameState.timeLeft, timeLimit]);
 
   // ランダムな単語を取得する関数
-  const getRandomWord = useCallback((wordList: Word[]): Word => {
-    return wordList[Math.floor(Math.random() * wordList.length)];
+  const getRandomWord = useCallback((): Word => {
+    return getRandomWordFromList(wordsRef.current);
   }, []);
 
   // 単語ごとの制限時間を計算する関数
   const calculateWordTimeLimit = useCallback((word: string): number => {
-    // 基本的に1文字あたり baseTime 秒、最低 minTime 秒
-    const baseTime = 1.5; // 1文字あたりの時間（秒）
-    const minTime = 3; // 最低時間（秒）
-    return Math.max(word.length * baseTime, minTime);
+    // より複雑な計算方法に変更
+    // ベースタイム + 文字数×秒数で計算、文字数が多いほど時間も多くなるが、徐々に増加率が減少
+    const baseTime = 2.5; // 基本の秒数
+    const timePerChar = 0.8; // 1文字あたりの追加秒数
+    const minTime = 3.0; // 最低保証時間
+    const maxTime = 12.0; // 最大制限時間
+
+    // 文字数に基づく時間 (徐々に増加率が減少するための平方根を使用)
+    let calculatedTime = baseTime + timePerChar * Math.sqrt(word.length * 1.5);
+
+    // 最小値と最大値の範囲内に収める
+    calculatedTime = Math.max(minTime, Math.min(maxTime, calculatedTime));
+
+    // 若干のランダム性を追加してバリエーションを持たせる（±0.5秒）
+    const randomFactor = (Math.random() - 0.5) * 1.0;
+    calculatedTime += randomFactor;
+
+    // 小数点第1位までの値に丸める
+    return Math.round(calculatedTime * 10) / 10;
   }, []);
 
   // 単語タイマーを開始する関数
   const startWordTimer = useCallback(() => {
-    // 既存のタイマーをクリア
-    if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+    // 既存のタイマーをクリア（必ず実行）
+    if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+      console.log("既存の単語タイマーをクリア");
       clearInterval(wordTimerIntervalRef.current);
       wordTimerIntervalRef.current = null;
     }
 
+    // currentWordが未定義の場合は処理を中断
+    if (!gameState.currentWord || !gameState.currentWord.roman) {
+      console.log("警告: 現在の単語が未定義です");
+      return 0;
+    }
+
     // 単語の長さに基づいて制限時間を計算
+    console.log(`単語「${gameState.currentWord.japanese}」の制限時間を計算`);
     const wordTimeLimit = calculateWordTimeLimit(gameState.currentWord.roman);
+    console.log(`単語「${gameState.currentWord.japanese || ""}」の制限時間を設定: ${wordTimeLimit}秒`);
 
     // 初期状態を設定
     setGameState((prev) => ({
@@ -138,12 +176,14 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
     // カウントダウン中は単語タイマーを開始しない
     if (isCountingDown()) {
+      console.log("カウントダウン中のため単語タイマーを開始しません");
       return wordTimeLimit;
     }
 
     // クライアントサイドでのみ実行されるようにする
     if (typeof window !== "undefined") {
       // タイマーを開始（100msごとに更新）
+      console.log("単語タイマーを開始");
       wordTimerIntervalRef.current = window.setInterval(() => {
         setGameState((prev) => {
           // カウントダウン中になった場合はタイマーを更新しない
@@ -157,7 +197,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
           // 時間切れの場合
           if (newWordTimeLeft <= 0) {
             // タイマーをクリア
-            if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+            if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+              console.log("タイムアウト: 単語タイマーをクリア");
               clearInterval(wordTimerIntervalRef.current);
               wordTimerIntervalRef.current = null;
             }
@@ -169,7 +210,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
             setTimeout(() => {
               setGameState((state) => ({
                 ...state,
-                currentWord: getRandomWord(words),
+                currentWord: getRandomWord(),
                 userInput: "",
                 mistakeCount: 0,
                 lastMistakeChar: "",
@@ -195,14 +236,14 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     }
 
     return wordTimeLimit;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [calculateWordTimeLimit, getRandomWord, playSound]);
 
   // 新しい単語を表示する関数
   const displayNewWord = useCallback(() => {
     setGameState((prev) => ({
       ...prev,
-      currentWord: getRandomWord(words),
+      currentWord: getRandomWord(),
       userInput: "",
       mistakeCount: 0,
       lastMistakeChar: "",
@@ -268,6 +309,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
         // 単語タイマーもクリア
         if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+          console.log("ゲーム終了: 単語タイマーをクリア");
           clearInterval(wordTimerIntervalRef.current);
           wordTimerIntervalRef.current = null;
         }
@@ -291,6 +333,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
       if (wasCountingDown && !isNowCountingDown) {
         // カウントダウンが終わったので単語タイマーを開始（一度だけ）
+        console.log("カウントダウン終了: 単語タイマーを開始");
         setTimeout(() => {
           startWordTimer();
         }, 0);
@@ -324,6 +367,10 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         completionBonus: 0,
       },
     });
+
+    // 最初の単語を先に取得
+    const initialWord = getRandomWord();
+
     // ゲーム状態を更新
     setGameState((prev) => ({
       ...prev,
@@ -331,6 +378,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       timeLeft: timeLimit + COUNT_DOWN_TIME,
       isGameStarted: true,
       isGameOver: false,
+      // 最初の単語を設定
+      currentWord: initialWord,
     }));
 
     // タイマーをスタート
@@ -342,7 +391,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     if (typeof window !== "undefined") {
       timerRef.current = window.setInterval(updateTimer, 1000);
     }
-  }, [timeLimit, updateTimer]);
+  }, [timeLimit, updateTimer, getRandomWord]);
 
   // ゲームをリセットする関数
   const resetGame = useCallback(() => {
@@ -389,8 +438,9 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         completionBonus: 0,
       },
     });
-    startGame;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // 注: ここがバグの原因。startGame; は関数を呼び出していない
+    // startGame; を削除 (実行が必要な場合は startGame() とすべき)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLimit]);
 
   // 再チャレンジする関数
@@ -472,7 +522,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
           // 正解音を鳴らす
           playSound("correct");
           // 単語タイマーをクリア
-          if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+          if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+            console.log("単語完了: 単語タイマーをクリア");
             clearInterval(wordTimerIntervalRef.current);
             wordTimerIntervalRef.current = null;
           }
@@ -485,7 +536,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
           setTimeout(() => {
             setGameState((state) => ({
               ...state,
-              currentWord: getRandomWord(words),
+              currentWord: getRandomWord(),
               userInput: "",
               mistakeCount: 0,
               lastMistakeChar: "",
@@ -519,25 +570,37 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
   // 単語が変わったとき、または最初の単語が表示されたときにタイマーを開始
   useEffect(() => {
-    if (gameState.isGameStarted && gameState.currentWord.roman && !gameState.isGameOver) {
+    // タイマーの参照を保持して、クリーンアップで使用
+    let localWordTimerRef = wordTimerIntervalRef.current;
+
+    if (gameState.isGameStarted && gameState.currentWord && gameState.currentWord.roman && !gameState.isGameOver) {
+      console.log(`単語が変更されたため単語タイマーを開始: 「${gameState.currentWord.japanese || ""}」`);
       const timeLimit = startWordTimer();
-      console.log(`単語「${gameState.currentWord.japanese}」の制限時間: ${timeLimit}秒`);
+      console.log(`単語「${gameState.currentWord.japanese || ""}」の制限時間: ${timeLimit}秒`);
+      // 新しいタイマーの参照を保持
+      localWordTimerRef = wordTimerIntervalRef.current;
     }
 
     return () => {
-      // タイマーをクリア
-      if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+      // タイマーをクリア（ローカル参照も使用）
+      if (localWordTimerRef !== null && typeof window !== "undefined") {
+        console.log("クリーンアップ: 単語タイマーをクリア (ローカル参照)");
+        clearInterval(localWordTimerRef);
+      }
+      if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+        console.log("クリーンアップ: 単語タイマーをクリア (グローバル参照)");
         clearInterval(wordTimerIntervalRef.current);
         wordTimerIntervalRef.current = null;
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameState.currentWord.japanese, gameState.isGameStarted, gameState.isGameOver, startWordTimer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState.currentWord, gameState.isGameStarted, gameState.isGameOver]);
 
   // ゲームが終了または一時停止したときにもタイマーをクリア
   useEffect(() => {
     if (!gameState.isGameStarted || gameState.isGameOver) {
-      if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+      if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+        console.log("ゲーム終了/一時停止: 単語タイマーをクリア");
         clearInterval(wordTimerIntervalRef.current);
         wordTimerIntervalRef.current = null;
       }
@@ -547,16 +610,24 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   // コンポーネントのアンマウント時にタイマーをクリア
   useEffect(() => {
     return () => {
-      if (timerRef.current && typeof window !== "undefined") {
+      if (timerRef.current !== null && typeof window !== "undefined") {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
 
-      if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+      if (wordTimerIntervalRef.current !== null && typeof window !== "undefined") {
+        console.log("アンマウント: 単語タイマーをクリア");
         clearInterval(wordTimerIntervalRef.current);
         wordTimerIntervalRef.current = null;
       }
     };
+  }, []);
+
+  // 初期化用のeffect - words配列が用意できたら参照を更新
+  useEffect(() => {
+    if (words && words.length > 0) {
+      wordsRef.current = words;
+    }
   }, []);
 
   // 初回のゲーム開始時に新しい単語を表示
