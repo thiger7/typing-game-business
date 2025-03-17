@@ -156,8 +156,34 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
 
           // 時間切れの場合
           if (newWordTimeLeft <= 0) {
-            // 以下は既存のコード
-            // ...
+            // タイマーをクリア
+            if (wordTimerIntervalRef.current && typeof window !== "undefined") {
+              clearInterval(wordTimerIntervalRef.current);
+              wordTimerIntervalRef.current = null;
+            }
+
+            // 間違い音を鳴らす
+            playSound("wrong");
+
+            // 次の問題を表示
+            setTimeout(() => {
+              setGameState((state) => ({
+                ...state,
+                currentWord: getRandomWord(words),
+                userInput: "",
+                mistakeCount: 0,
+                lastMistakeChar: "",
+              }));
+            }, 500);
+
+            // タイプ統計を更新（タイムアウトによるミスとしてカウント）
+            setTypeStats((stats) => ({
+              ...stats,
+              totalTyped: stats.totalTyped + 1,
+              mistakeTyped: stats.mistakeTyped + 1,
+              combo: 0, // コンボをリセット
+              accuracy: Math.round((stats.correctTyped / (stats.totalTyped + 1)) * 100),
+            }));
           }
 
           return {
@@ -169,7 +195,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
     }
 
     return wordTimeLimit;
-  }, [calculateWordTimeLimit, gameState.currentWord.roman, getRandomWord, playSound, isCountingDown]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [calculateWordTimeLimit, getRandomWord, playSound]);
 
   // 新しい単語を表示する関数
   const displayNewWord = useCallback(() => {
@@ -258,13 +285,15 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         };
       }
 
-      // カウントダウンが終わった瞬間（ゲーム開始）
+      // カウントダウンが終わった瞬間（ゲーム開始）の一度だけ単語タイマーを開始
       const wasCountingDown = prev.timeLeft > timeLimit;
       const isNowCountingDown = newTimeLeft > timeLimit;
 
       if (wasCountingDown && !isNowCountingDown) {
-        // カウントダウンが終わったので単語タイマーを再開
-        startWordTimer();
+        // カウントダウンが終わったので単語タイマーを開始（一度だけ）
+        setTimeout(() => {
+          startWordTimer();
+        }, 0);
       }
 
       return {
@@ -361,6 +390,7 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
       },
     });
     startGame;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLimit]);
 
   // 再チャレンジする関数
@@ -501,7 +531,8 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
         wordTimerIntervalRef.current = null;
       }
     };
-  }, [gameState.currentWord, gameState.isGameStarted, gameState.isGameOver, startWordTimer]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState.currentWord.japanese, gameState.isGameStarted, gameState.isGameOver, startWordTimer]);
 
   // ゲームが終了または一時停止したときにもタイマーをクリア
   useEffect(() => {

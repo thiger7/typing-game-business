@@ -64,6 +64,7 @@ export default function Home() {
           totalQuestions={typeStats.wordsCompleted}
           typeStats={typeStats}
           onRetry={handleRetry}
+          onStartGame={startGame}
           onReturnToTitle={onReturnToTitle}
         />
       )}
