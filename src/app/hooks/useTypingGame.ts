@@ -128,10 +128,10 @@ export const useTypingGame = (timeLimit = DEFAULT_TIME_LIMIT) => {
   const calculateWordTimeLimit = useCallback((word: string): number => {
     // より複雑な計算方法に変更
     // ベースタイム + 文字数×秒数で計算、文字数が多いほど時間も多くなるが、徐々に増加率が減少
-    const baseTime = 2.5; // 基本の秒数
-    const timePerChar = 0.8; // 1文字あたりの追加秒数
+    const baseTime = 3; // 基本の秒数
+    const timePerChar = 1; // 1文字あたりの追加秒数
     const minTime = 3.0; // 最低保証時間
-    const maxTime = 12.0; // 最大制限時間
+    const maxTime = 15.0; // 最大制限時間
 
     // 文字数に基づく時間 (徐々に増加率が減少するための平方根を使用)
     let calculatedTime = baseTime + timePerChar * Math.sqrt(word.length * 1.5);

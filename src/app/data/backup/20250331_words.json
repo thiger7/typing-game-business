@@ -1,8 +1,18 @@
 [
   {
+    "japanese": "製品",
+    "roman": "seihin",
+    "alternatives": []
+  },
+  {
     "japanese": "商品情報",
     "roman": "shouhinjouhou",
     "alternatives": ["syouhinjouhou", "shouhinzyouhou"]
+  },
+  {
+    "japanese": "カゴ",
+    "roman": "kago",
+    "alternatives": []
   },
   {
     "japanese": "注文",
@@ -15,6 +25,21 @@
     "alternatives": []
   },
   {
+    "japanese": "買い物",
+    "roman": "kaimono",
+    "alternatives": []
+  },
+  {
+    "japanese": "購入",
+    "roman": "kounyuu",
+    "alternatives": []
+  },
+  {
+    "japanese": "納付",
+    "roman": "noufu",
+    "alternatives": ["nouhu"]
+  },
+  {
     "japanese": "送料",
     "roman": "souryou",
     "alternatives": []
@@ -22,6 +47,16 @@
   {
     "japanese": "無料配送",
     "roman": "muryouhaisou",
+    "alternatives": []
+  },
+  {
+    "japanese": "値段",
+    "roman": "nedan",
+    "alternatives": []
+  },
+  {
+    "japanese": "定価",
+    "roman": "teika",
     "alternatives": []
   },
   {
@@ -55,9 +90,54 @@
     "alternatives": []
   },
   {
+    "japanese": "おすすめ",
+    "roman": "osusume",
+    "alternatives": []
+  },
+  {
+    "japanese": "新入荷",
+    "roman": "shinnyuuka",
+    "alternatives": []
+  },
+  {
+    "japanese": "限定品",
+    "roman": "genteihin",
+    "alternatives": []
+  },
+  {
+    "japanese": "企画",
+    "roman": "kikaku",
+    "alternatives": []
+  },
+  {
+    "japanese": "セット",
+    "roman": "setto",
+    "alternatives": []
+  },
+  {
+    "japanese": "特典料",
+    "roman": "tokutenryou",
+    "alternatives": []
+  },
+  {
     "japanese": "ギフト",
     "roman": "gifuto",
     "alternatives": ["gihuto"]
+  },
+  {
+    "japanese": "ラッピング",
+    "roman": "rappingu",
+    "alternatives": []
+  },
+  {
+    "japanese": "メール",
+    "roman": "me-ru",
+    "alternatives": ["meeru"]
+  },
+  {
+    "japanese": "登録",
+    "roman": "touroku",
+    "alternatives": []
   },
   {
     "japanese": "会員",
@@ -85,6 +165,11 @@
     "alternatives": []
   },
   {
+    "japanese": "詳細",
+    "roman": "shousai",
+    "alternatives": ["syousai"]
+  },
+  {
     "japanese": "イメージ",
     "roman": "ime-ji",
     "alternatives": ["imeeji", "ime-zi", "imeezi"]
@@ -100,8 +185,18 @@
     "alternatives": []
   },
   {
+    "japanese": "スペック",
+    "roman": "supekku",
+    "alternatives": []
+  },
+  {
     "japanese": "在庫",
     "roman": "zaiko",
+    "alternatives": []
+  },
+  {
+    "japanese": "確認",
+    "roman": "kakunin",
     "alternatives": []
   },
   {
@@ -120,6 +215,11 @@
     "alternatives": []
   },
   {
+    "japanese": "部主",
+    "roman": "bunushi",
+    "alternatives": []
+  },
+  {
     "japanese": "返品",
     "roman": "henpin",
     "alternatives": []
@@ -133,6 +233,16 @@
     "japanese": "保証",
     "roman": "hoshou",
     "alternatives": ["hosyou"]
+  },
+  {
+    "japanese": "アフィリエイト",
+    "roman": "afirieito",
+    "alternatives": []
+  },
+  {
+    "japanese": "コミッション",
+    "roman": "komisshon",
+    "alternatives": []
   },
   {
     "japanese": "キーワード",
@@ -157,7 +267,7 @@
   {
     "japanese": "インプレッション",
     "roman": "inpuresshon",
-    "alternatives": ["inpuressyon"]
+    "alternatives": []
   },
   {
     "japanese": "CTR",
@@ -172,7 +282,7 @@
   {
     "japanese": "ウェブショッピング",
     "roman": "webushoppingu",
-    "alternatives": ["websyoppingu"]
+    "alternatives": []
   },
   {
     "japanese": "スマホ",
@@ -205,6 +315,11 @@
     "alternatives": ["firutaa"]
   },
   {
+    "japanese": "ダイアリー",
+    "roman": "daiari-",
+    "alternatives": ["daiarii"]
+  },
+  {
     "japanese": "クーポン",
     "roman": "ku-pon",
     "alternatives": ["kuupon"]
@@ -213,6 +328,16 @@
     "japanese": "プロモーション",
     "roman": "puromo-shon",
     "alternatives": ["puromoosyon", "puromooson"]
+  },
+  {
+    "japanese": "カスタマー",
+    "roman": "kasutama-",
+    "alternatives": ["kasutamaa"]
+  },
+  {
+    "japanese": "サービス",
+    "roman": "sa-bisu",
+    "alternatives": ["saabisu"]
   },
   {
     "japanese": "エクスポート",
@@ -235,19 +360,34 @@
     "alternatives": []
   },
   {
+    "japanese": "アクセス",
+    "roman": "akusesu",
+    "alternatives": []
+  },
+  {
     "japanese": "アナリティクス",
-    "roman": "anarithikusu",
-    "alternatives": ["anaritexikusu"]
+    "roman": "anaritiukusu",
+    "alternatives": []
   },
   {
     "japanese": "コンバージョンレート",
-    "roman": "konba-jonre-to",
-    "alternatives": ["konba-zyonreeto"]
+    "roman": "konbajonre-to",
+    "alternatives": ["konbajonreeto"]
   },
   {
     "japanese": "リターゲティング",
     "roman": "rita-getingu",
     "alternatives": ["ritaagetingu"]
+  },
+  {
+    "japanese": "ショッピングリスト",
+    "roman": "shoppingurisuto",
+    "alternatives": ["syoppingurisuto"]
+  },
+  {
+    "japanese": "ピックアップ",
+    "roman": "pikkuappu",
+    "alternatives": []
   },
   {
     "japanese": "らくらく検索",
@@ -271,7 +411,7 @@
   },
   {
     "japanese": "ディスプレイ広告",
-    "roman": "dhisupureikoukoku",
+    "roman": "disupureikoukoku",
     "alternatives": []
   },
   {
@@ -292,6 +432,21 @@
   {
     "japanese": "オンラインストア",
     "roman": "onrainsutoa",
+    "alternatives": []
+  },
+  {
+    "japanese": "配達",
+    "roman": "haitatsu",
+    "alternatives": ["haitatu"]
+  },
+  {
+    "japanese": "運送",
+    "roman": "unsou",
+    "alternatives": []
+  },
+  {
+    "japanese": "梱包",
+    "roman": "konpou",
     "alternatives": []
   },
   {
@@ -325,9 +480,24 @@
     "alternatives": ["maipeeji", "maipe-zi"]
   },
   {
+    "japanese": "プライバシー",
+    "roman": "puraibashi-",
+    "alternatives": ["puraibashii"]
+  },
+  {
+    "japanese": "ポリシー",
+    "roman": "porishi-",
+    "alternatives": ["porishii"]
+  },
+  {
     "japanese": "特定商取引法",
     "roman": "tokuteishouhoutorihikihou",
     "alternatives": ["tokuteisyouhoutorihikihou"]
+  },
+  {
+    "japanese": "デジタルコンテンツ",
+    "roman": "dejitarukontentu",
+    "alternatives": ["dezitarukontentsu", "dezitarukontentu"]
   },
   {
     "japanese": "メンバーシップ",
@@ -375,6 +545,11 @@
     "alternatives": ["waribikikuupon"]
   },
   {
+    "japanese": "タイムセール",
+    "roman": "taimuse-ru",
+    "alternatives": ["taimuseeru"]
+  },
+  {
     "japanese": "期間限定",
     "roman": "kikangentei",
     "alternatives": []
@@ -410,6 +585,11 @@
     "alternatives": ["nouninsyo"]
   },
   {
+    "japanese": "特別価格",
+    "roman": "tokubetsukakaku",
+    "alternatives": ["tokubetukakaku"]
+  },
+  {
     "japanese": "セキュリティ",
     "roman": "sekyuriti",
     "alternatives": []
@@ -431,8 +611,18 @@
   },
   {
     "japanese": "追跡番号",
-    "roman": "tuisekibangou",
-    "alternatives": ["tsuisekibangou", "tuisekibanngou"]
+    "roman": "tsuisekibangou",
+    "alternatives": ["tuisekibangou"]
+  },
+  {
+    "japanese": "キャッシュバック",
+    "roman": "kyasshubakku",
+    "alternatives": []
+  },
+  {
+    "japanese": "支払い方法",
+    "roman": "shiharaihouhou",
+    "alternatives": ["siharaihouhou"]
   },
   {
     "japanese": "銀行振込",
@@ -460,6 +650,16 @@
     "alternatives": ["sokujituhassou", "sokuzituhassou"]
   },
   {
+    "japanese": "海外発送",
+    "roman": "kaigaihassou",
+    "alternatives": ["kaigaihassou"]
+  },
+  {
+    "japanese": "国際配送",
+    "roman": "kokusaihaisou",
+    "alternatives": []
+  },
+  {
     "japanese": "送料無料",
     "roman": "souryoumuryou",
     "alternatives": []
@@ -480,6 +680,16 @@
     "alternatives": []
   },
   {
+    "japanese": "ヘルプセンター",
+    "roman": "herupusenta-",
+    "alternatives": ["herupusentaa"]
+  },
+  {
+    "japanese": "ショッピングガイド",
+    "roman": "shoppingugaido",
+    "alternatives": ["syoppingugaido"]
+  },
+  {
     "japanese": "ブランド",
     "roman": "burando",
     "alternatives": []
@@ -490,9 +700,19 @@
     "alternatives": []
   },
   {
+    "japanese": "製造元",
+    "roman": "seizougen",
+    "alternatives": []
+  },
+  {
     "japanese": "メーカー",
     "roman": "me-ka-",
     "alternatives": ["meekaa"]
+  },
+  {
+    "japanese": "原産国",
+    "roman": "gensankoku",
+    "alternatives": []
   },
   {
     "japanese": "素材",
@@ -500,9 +720,29 @@
     "alternatives": []
   },
   {
+    "japanese": "成分表示",
+    "roman": "seibunhyouji",
+    "alternatives": ["seibunhyouzi"]
+  },
+  {
+    "japanese": "使用方法",
+    "roman": "shiyouhouhou",
+    "alternatives": ["siyouhouhou"]
+  },
+  {
     "japanese": "注意事項",
     "roman": "chuuijikou",
     "alternatives": ["tyuuijikou", "chuuizikou"]
+  },
+  {
+    "japanese": "保証期間",
+    "roman": "hoshoukikan",
+    "alternatives": ["hosyoukikan"]
+  },
+  {
+    "japanese": "修理",
+    "roman": "shuuri",
+    "alternatives": ["syuuri"]
   },
   {
     "japanese": "メンテナンス",
@@ -535,9 +775,54 @@
     "alternatives": ["ninkisyouhin"]
   },
   {
+    "japanese": "オススメ商品",
+    "roman": "osusumeshouhin",
+    "alternatives": ["osusumesyouhin"]
+  },
+  {
     "japanese": "関連商品",
     "roman": "kanrenshouhin",
     "alternatives": ["kanrensyouhin"]
+  },
+  {
+    "japanese": "セット販売",
+    "roman": "settohanbai",
+    "alternatives": []
+  },
+  {
+    "japanese": "バンドル",
+    "roman": "bandoru",
+    "alternatives": []
+  },
+  {
+    "japanese": "福袋",
+    "roman": "fukubukuro",
+    "alternatives": []
+  },
+  {
+    "japanese": "アウトレット",
+    "roman": "autoretto",
+    "alternatives": []
+  },
+  {
+    "japanese": "中古品",
+    "roman": "chuukohin",
+    "alternatives": ["tyuukohin"]
+  },
+  {
+    "japanese": "新品",
+    "roman": "shinpin",
+    "alternatives": ["sinpin"]
+  },
+  {
+    "japanese": "展示品",
+    "roman": "tenjihin",
+    "alternatives": ["tenzijin"]
+  },
+  {
+    "japanese": "予約開始",
+    "roman": "yoyakukaishi",
+    "alternatives": []
   },
   {
     "japanese": "販売終了",
@@ -575,193 +860,8 @@
     "alternatives": []
   },
   {
-    "japanese": "オムニチャネル",
-    "roman": "omunityaneru",
-    "alternatives": ["omunichaneru", "omnityaneru"]
-  },
-  {
-    "japanese": "Omni Hub",
-    "roman": "omnihub",
+    "japanese": "分割払い",
+    "roman": "bunkatsubarai",
     "alternatives": []
-  },
-  {
-    "japanese": "最高の購買体験",
-    "roman": "saikounokoubaitaiken",
-    "alternatives": ["saikounokoubaitaikenn"]
-  },
-  {
-    "japanese": "OMOを手軽に実現",
-    "roman": "omowotegarunizitugen",
-    "alternatives": ["omowotegarunijitsugen", "omowotegarinijitugen"]
-  },
-  {
-    "japanese": "オンラインオフラインの会員情報一元化",
-    "roman": "onrainohurainnokaiinzyouhouitigenka",
-    "alternatives": ["onnrainnohurainnnokaiinnzyouhouitigenka", "onnrainnohurainnnokaiinnjouhouichigenka"]
-  },
-  {
-    "japanese": "店舗とECでのポイント共通化",
-    "roman": "tenpotoecdenopointokyoutsuuka",
-    "alternatives": ["tenpootoecdenopoinngokyoutuuka"]
-  },
-  {
-    "japanese": "LINEやモバイルアプリ連携",
-    "roman": "lineyamobairuapurirenkei",
-    "alternatives": []
-  },
-  {
-    "japanese": "POSシステム",
-    "roman": "posshisutemu",
-    "alternatives": ["possisutemu"]
-  },
-  {
-    "japanese": "ECプラットフォーム",
-    "roman": "ecpurattofo-mu",
-    "alternatives": []
-  },
-  {
-    "japanese": "Shopifyアプリ",
-    "roman": "shopifyapuri",
-    "alternatives": []
-  },
-  {
-    "japanese": "スマレジアプリ",
-    "roman": "sumarejiapuri",
-    "alternatives": ["sumareziapuri"]
-  },
-  {
-    "japanese": "Squareアプリ",
-    "roman": "squareapuri",
-    "alternatives": ["squareapuri"]
-  },
-  {
-    "japanese": "ShopifyExperts",
-    "roman": "shopifyexperts",
-    "alternatives": []
-  },
-  {
-    "japanese": "スマレジDevelopersExpert",
-    "roman": "sumarejidevelopersexpert",
-    "alternatives": ["sumarezidevelopersexpert"]
-  },
-  {
-    "japanese": "データフィードのことでもう悩まない",
-    "roman": "de-tafi-donokotodemounayamanai",
-    "alternatives": ["de-tahuxi-donokotodemounayamanai"]
-  },
-  {
-    "japanese": "圧倒的な機能性・UIで使いやすい",
-    "roman": "attoutekinakinouseiuidetukaiyasui",
-    "alternatives": ["attoutekinakinouseiuidetsukaiyasui"]
-  },
-  {
-    "japanese": "データフィード管理ツールの決定版",
-    "roman": "de-tafi-dokanritu-runoketteiban",
-    "alternatives": ["de-tafi-dokannritu-runoketteibann"]
-  },
-  {
-    "japanese": "dfplus.io",
-    "roman": "dfplusio",
-    "alternatives": []
-  },
-  {
-    "japanese": "累計1000サイト以上にご導入いただいています",
-    "roman": "ruikei1000saitoijounigodounyuitadaiteimasu",
-    "alternatives": ["ruikei1000saitoizyounigodounyuuitadaiteimasu"]
-  },
-  {
-    "japanese": "MicroATS",
-    "roman": "microats",
-    "alternatives": []
-  },
-  {
-    "japanese": "広告配信に必要なフィードを簡単に",
-    "roman": "koukokuhaisinnnihituyounafi-dowokanntannni",
-    "alternatives": ["koukokuhaisinnihituyounafi-dowokantanni"]
-  },
-  {
-    "japanese": "フィードの内容を自由自在に最適化",
-    "roman": "fidononaiyouwojiyuujizainisaitekika",
-    "alternatives": ["fi-donaiyouwojiyuujizainisaitekika", "fiidononaiyouwojiyuujizainisaitekika"]
-  },
-  {
-    "japanese": "複数のフィードでも一画面で統合管理",
-    "roman": "hukusuunofi-dodemoichigamenndetougoukanri",
-    "alternatives": ["fukusuunofi-dodemoitigamenndetougoukganri", "hukusuunofi-dodemoichigamendetougoukanri"]
-  },
-  {
-    "japanese": "Googleショッピング",
-    "roman": "googleshoppingu",
-    "alternatives": []
-  },
-  {
-    "japanese": "Facebook",
-    "roman": "facebook",
-    "alternatives": ["facebook"]
-  },
-  {
-    "japanese": "Instagram",
-    "roman": "instagram",
-    "alternatives": ["instragram"]
-  },
-  {
-    "japanese": "Criteo",
-    "roman": "criteo",
-    "alternatives": ["criteo"]
-  },
-  {
-    "japanese": "indeed",
-    "roman": "indeed",
-    "alternatives": ["indeed"]
-  },
-  {
-    "japanese": "ダイナミック広告",
-    "roman": "dainamikkukoukoku",
-    "alternatives": ["dynamickoukoku"]
-  },
-  {
-    "japanese": "アウトプットに愛を",
-    "roman": "autoputtoniaiwo",
-    "alternatives": ["autoputtoniaiwo"]
-  },
-  {
-    "japanese": "10倍思考",
-    "roman": "10baishikou",
-    "alternatives": ["10baisikou"]
-  },
-  {
-    "japanese": "日々混沌日々進化",
-    "roman": "hibikonntonnhibisinka",
-    "alternatives": ["hibikontonhibisinka", "hibikonntonnibishinka"]
-  },
-  {
-    "japanese": "チームファースト",
-    "roman": "ti-mufa-suto",
-    "alternatives": ["chi-mufa-suto", "ti-muhuxa-suto"]
-  },
-  {
-    "japanese": "ビジネスにとどけるテクノロジーと鼻歌を",
-    "roman": "bizinesunitodokerutekunorozi-tohanautawo",
-    "alternatives": ["bizinesunitodokerutekunorozi-tohanautawo", "bijinesunitodokerutekunorozi-tohanautawo"]
-  },
-  {
-    "japanese": "働くを豊かにする",
-    "roman": "hatarakuwoyutakanisuru",
-    "alternatives": []
-  },
-  {
-    "japanese": "ROAS652%",
-    "roman": "roas652%",
-    "alternatives": []
-  },
-  {
-    "japanese": "Web広告の自動運用サービス",
-    "roman": "webkoukokunojidouunyousa-bisu",
-    "alternatives": ["webkoukokunozidouunyousa-bisu"]
-  },
-  {
-    "japanese": "ECBooster",
-    "roman": "ECBooster",
-    "alternatives": ["ecbooster"]
   }
 ]
