@@ -141,8 +141,8 @@
   },
   {
     "japanese": "ターゲティング",
-    "roman": "ta-getingu",
-    "alternatives": ["taagetingu"]
+    "roman": "ta-gethingu",
+    "alternatives": ["taagethingu"]
   },
   {
     "japanese": "コンバージョン",
@@ -174,16 +174,7 @@
     "roman": "webushoppingu",
     "alternatives": ["websyoppingu"]
   },
-  {
-    "japanese": "スマホ",
-    "roman": "sumaho",
-    "alternatives": []
-  },
-  {
-    "japanese": "アプリ",
-    "roman": "apuri",
-    "alternatives": []
-  },
+  
   {
     "japanese": "フィード",
     "roman": "fi-do",
@@ -212,12 +203,12 @@
   {
     "japanese": "プロモーション",
     "roman": "puromo-shon",
-    "alternatives": ["puromoosyon", "puromooson"]
+    "alternatives": ["puromo-syon"]
   },
   {
     "japanese": "エクスポート",
     "roman": "ekusupo-to",
-    "alternatives": ["ekusupooto"]
+    "alternatives": []
   },
   {
     "japanese": "インポート",
@@ -237,7 +228,7 @@
   {
     "japanese": "アナリティクス",
     "roman": "anarithikusu",
-    "alternatives": ["anaritexikusu"]
+    "alternatives": []
   },
   {
     "japanese": "コンバージョンレート",
@@ -246,8 +237,8 @@
   },
   {
     "japanese": "リターゲティング",
-    "roman": "rita-getingu",
-    "alternatives": ["ritaagetingu"]
+    "roman": "rita-gethingu",
+    "alternatives": ["ritaagethingu"]
   },
   {
     "japanese": "らくらく検索",
@@ -272,11 +263,6 @@
   {
     "japanese": "ディスプレイ広告",
     "roman": "dhisupureikoukoku",
-    "alternatives": []
-  },
-  {
-    "japanese": "スパム",
-    "roman": "supamu",
     "alternatives": []
   },
   {
@@ -342,7 +328,7 @@
   {
     "japanese": "商品説明",
     "roman": "shouhinsetumei",
-    "alternatives": ["syouhinsetumei", "shouhinsetumei"]
+    "alternatives": ["syouhinsetumei", "shouhinsetsumei"]
   },
   {
     "japanese": "トレンド商品",
@@ -375,29 +361,9 @@
     "alternatives": ["waribikikuupon"]
   },
   {
-    "japanese": "期間限定",
-    "roman": "kikangentei",
-    "alternatives": []
-  },
-  {
-    "japanese": "数量限定",
-    "roman": "suuryougentei",
-    "alternatives": []
-  },
-  {
-    "japanese": "品切れ",
-    "roman": "shinagire",
-    "alternatives": []
-  },
-  {
     "japanese": "再入荷",
     "roman": "sainyuuka",
     "alternatives": []
-  },
-  {
-    "japanese": "お届け日時",
-    "roman": "otodokenichiji",
-    "alternatives": ["otodokenitiji", "otodokenitizi"]
   },
   {
     "japanese": "領収書",
@@ -411,28 +377,13 @@
   },
   {
     "japanese": "セキュリティ",
-    "roman": "sekyuriti",
+    "roman": "sekyurithi",
     "alternatives": []
   },
   {
     "japanese": "認証",
     "roman": "ninsho",
     "alternatives": ["ninsyo"]
-  },
-  {
-    "japanese": "出荷通知",
-    "roman": "shukkatsuuchi",
-    "alternatives": ["syukkatuuti"]
-  },
-  {
-    "japanese": "配送状況",
-    "roman": "haisoujoukyou",
-    "alternatives": ["haisoujoukyou"]
-  },
-  {
-    "japanese": "追跡番号",
-    "roman": "tuisekibangou",
-    "alternatives": ["tsuisekibangou", "tuisekibanngou"]
   },
   {
     "japanese": "銀行振込",
@@ -540,11 +491,6 @@
     "alternatives": ["kanrensyouhin"]
   },
   {
-    "japanese": "販売終了",
-    "roman": "hanbaishuuryou",
-    "alternatives": ["hanbaishuuryou"]
-  },
-  {
     "japanese": "返金",
     "roman": "henkin",
     "alternatives": []
@@ -591,12 +537,12 @@
   },
   {
     "japanese": "OMOを手軽に実現",
-    "roman": "omowotegarunizitugen",
-    "alternatives": ["omowotegarunijitsugen", "omowotegarinijitugen"]
+    "roman": "omowotegarunijitugen",
+    "alternatives": ["omowotegarunizitsugen", "omowotegarinijitugen"]
   },
   {
     "japanese": "オンラインオフラインの会員情報一元化",
-    "roman": "onrainohurainnokaiinzyouhouitigenka",
+    "roman": "onrainohurainnokaiinzjouhouitigenka",
     "alternatives": ["onnrainnohurainnnokaiinnzyouhouitigenka", "onnrainnohurainnnokaiinnjouhouichigenka"]
   },
   {
