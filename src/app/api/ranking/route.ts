@@ -16,7 +16,6 @@ export async function GET() {
     .limit(10);
 
   if (error) {
-    console.error("Error fetching rankings:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
@@ -46,13 +45,11 @@ export async function POST(request: Request) {
       }]);
 
     if (error) {
-      console.error("Error inserting ranking:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json(data || [], { status: 201 });
   } catch (error) {
-    console.error("Unexpected error:", error);
     return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

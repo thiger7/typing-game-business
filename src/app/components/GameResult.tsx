@@ -4,7 +4,6 @@ import { Ranking } from "@/app/components/Ranking";
 
 import { registerRanking } from "../services/rankingService";
 import { TypeStats } from "../types";
-import { cp } from "fs";
 
 interface GameResultProps {
   score: number;
@@ -67,10 +66,8 @@ export const GameResult: React.FC<GameResultProps> = ({
       });
 
       setIsRegistered(true);
-      console.log("ランキング登録成功:", { nickname, score, stats: typeStats });
     } catch (error) {
       setRegistrationError("ランキング登録に失敗しました。後でもう一度お試しください。");
-      console.error("ランキング登録エラー:", error);
     } finally {
       setIsRegistering(false);
     }

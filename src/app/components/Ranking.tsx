@@ -18,9 +18,8 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
         const allRankings = await getRankings();
         const top10Rankings = allRankings.slice(0, 10);
         setRankings(top10Rankings);
-        console.log("ランキングデータを読み込みました:", top10Rankings);
       } catch (error) {
-        console.error("ランキングデータの読み込みに失敗しました:", error);
+        // エラーは無視（UIでは「データがありません」と表示される）
       } finally {
         setLoading(false);
       }
@@ -45,7 +44,6 @@ export const Ranking: React.FC<RankingProps> = ({ onClose }) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Escape") {
-        console.log("ランキング画面を閉じます");
         onClose();
       }
     };

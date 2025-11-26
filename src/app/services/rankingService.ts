@@ -19,8 +19,6 @@ export const registerRanking = async (data: RegisterRankingRequest): Promise<Ran
     body: JSON.stringify(data),
   });
   if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Error response from server:", errorText);
     throw new Error("ランキング登録に失敗しました");
   }
   return response.json();

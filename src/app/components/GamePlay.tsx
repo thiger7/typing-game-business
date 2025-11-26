@@ -125,20 +125,6 @@ export const GamePlay: React.FC<GamePlayProps> = ({
       return;
     }
 
-    // 次に期待される文字
-    const nextIndex = prevInput.length;
-    const expectedChar = currentWord.roman[nextIndex];
-
-    console.log(`入力チェック - インデックス:${nextIndex}, 期待:${expectedChar || "終了"}, 入力:${newChar}`);
-
-    // 入力された文字が正しいかどうかを確認
-    if (expectedChar && newChar !== expectedChar) {
-      console.log(`ミスを検出: 期待 "${expectedChar}", 入力 "${newChar}"`);
-    } else if (!expectedChar) {
-      // 入力が単語の長さを超えた場合
-      console.log(`単語の長さを超える入力: ${value}`);
-    }
-
     // 親コンポーネントの処理を呼び出す
     onInputChange(value);
   };
